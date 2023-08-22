@@ -4,7 +4,7 @@ class Wallpaper {
         data.forEach((element) => {
             htmData += `
                 <div class="img-full">
-                    <video class="rounded-[36px] w-[100vw] h-[100vh] relative " loop muted autoPlay class="charging-video" src="${element.src}"></video>
+                    <video class="rounded-[36px] w-[100%] h-[100vh]  object-cover relative " loop muted autoPlay class="charging-video" src="${element.src}"></video>
                     <div class="rounded-[36px] absolute top-0 border-[12px] border-black border-solid w-screen h-screen"></div>
                     <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0 bg-black w-[200px] h-[70px] rounded-b-xl"></div>
                     <div onclick="Back()" class="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-[4px] border-[4px] text-black bg-[#D0F023] border-[#D0F023] border-solid rounded-b-xl">Back</div>
