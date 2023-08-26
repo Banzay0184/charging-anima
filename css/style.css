@@ -1,12 +1,14 @@
 .charging-video {
     border-radius: 20px;
+    height: 100% !important;
 }
 
 .slider-line {
     display: flex;
 }
 
-.slider {
+.swiper-wrapper {
+    align-items: center;
 }
 
 .hot-text {

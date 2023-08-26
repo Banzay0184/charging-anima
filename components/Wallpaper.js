@@ -4,9 +4,14 @@ class Wallpaper {
         data.forEach((element) => {
             htmData += `
                 <div class="img-full">
-                    <video class="rounded-[36px] w-[100%] h-[100vh]  object-cover relative " loop muted autoPlay class="charging-video" src="${element.src}"></video>
+                    <img class="rounded-[36px] w-[100%] h-[100vh]  object-cover relative"  class="charging-video" src="${element.src}"></img>
                     <div class="rounded-[36px] absolute top-0 border-[12px] border-black border-solid w-screen h-screen"></div>
                     <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0 bg-black w-[200px] h-[70px] rounded-b-xl"></div>
+                    <div class="" id="battery">
+                        <div id="battery-level"></div>
+                        <div id="battery-level-digit">0%</div>
+                        <h1 id="sattus">nodsd</h1>
+                    </div>
                     <div onclick="Back()" class="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-[4px] border-[4px] text-black bg-[#D0F023] border-[#D0F023] border-solid rounded-b-xl">Back</div>
                 </div>
             `
@@ -66,3 +71,34 @@ function Back() {
     gameInfoPage.classList.add('hide')
     topGame.classList.remove('hide')
 }
+
+
+navigator.getBattery().then(function (battery) {
+    function updateAllBatteryInfo() {
+        updateChargeInfo();
+        updateLeveInfo();
+        // updateChargingInfo();
+        // updateDischarginInfo();
+    }
+
+    updateAllBatteryInfo();
+
+    battery.addEventListener('chargingchange', function () {
+        updateChargeInfo()
+    });
+
+    function updateChargeInfo() {
+        console.log(battery.charging);
+        if (battery.charging) {
+            document.querySelector('#sattus').innerHTML = 'Заряжаешься';
+        } else {
+            document.querySelector('#sattus').innerHTML = 'Разряжается';
+        }
+    }
+
+    battery.addEventListener('levelchange', updateLeveInfo);
+
+    function updateLeveInfo() {
+        document.querySelector('#battery-level-digit').innerHTML = battery.level*100+'%';
+    }
+})

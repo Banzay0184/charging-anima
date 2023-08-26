@@ -3,21 +3,21 @@ class Home {
         let htmlData = ''
         let htmlData2 = ''
 
-        data.forEach((elements) => {
+        data.filter((elements) => {
             htmlData += `
-                  <div class="swiper-slide">
-                    <video id="card-img" loop muted autoPlay class="charging-video" src="${elements.src}"></video>
+                  <div class="swiper-slide ${elements.category}">
+                    <img id="card-img" class="charging-video" src="${elements.src}"></img>
                   </div>
          `
         })
 
         htmlData2 += `
                 <div>
-                    <ul class="flex justify-around">
-                        <li class="py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#D0F023]">All</li>
-                        <li class="py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#666666]">Recommend</li>
-                        <li class="py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#666666]">Live</li>
-                        <li class="py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#666666]">Illustration</li>
+                    <ul class="cati-cati flex justify-around">
+                        <button data-f="All" class="categoryBtn py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#D0F023]">All</button>
+                        <button data-f="Recommend" class="categoryBtn py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#666666]">Recommend</button>
+                        <button data-f="Live" class="categoryBtn py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#666666]">Live</button>
+                        <button data-f="Illustration" class="categoryBtn py-[4px] text-[#] px-[12px] rounded-[20px] bg-[#666666]">Illustration</button>
                     </ul>
                 </div>
             `
@@ -33,7 +33,7 @@ class Home {
                         ${htmlData}
                     </div>
                 </div>
-                <h1 class="hot-text">Hot of the week</h1>
+                <h1 class="hot-text">Top Wallpaper</h1>
                 <div class="swiper mySwiper">
                     <div id="imgs" class="swiper-wrapper">
                         ${htmlData}
@@ -49,9 +49,6 @@ class Home {
 const homePage = new Home();
 homePage.render();
 
-// <video muted autoPlay className="charging-video"
-//            src="https://player.vimeo.com/external/378997981.sd.mp4?s=3d832c48a330d0a439560395f957e3e82fa65985&profile_id=165&oauth2_token_id=57447761"></video>
-
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3,
     spaceBetween: 30,
@@ -60,3 +57,32 @@ var swiper = new Swiper(".mySwiper", {
         clickable: true,
     },
 });
+
+const filterBtn = document.querySelectorAll('.swiper-slide')
+const btnVol = document.querySelectorAll('.categoryBtn')
+
+
+document.querySelector('.cati-cati').addEventListener('click', e => {
+    if (e.target.classList !== 'cati-cati') {
+
+    }
+    let filterClass = e.target.dataset['f']
+    filterBtn.forEach(el => {
+        if (!el.classList.contains(filterClass) && filterClass !== 'All') {
+            el.classList.add('hide')
+        } else {
+            el.classList.remove('hide')
+        }
+    })
+
+});
+
+
+btnVol.forEach(btn => {
+    btn.addEventListener('click', function () {
+        btnVol.forEach(btnn => btnn.classList.remove('bg-[#D0F023]'));
+        this.classList.add('bg-[#D0F023]')
+    })
+})
+
+
