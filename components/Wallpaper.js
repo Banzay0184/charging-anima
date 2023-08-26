@@ -7,10 +7,9 @@ class Wallpaper {
                     <img class="rounded-[36px] w-[100%] h-[100vh]  object-cover relative"  class="charging-video" src="${element.src}"></img>
                     <div class="rounded-[36px] absolute top-0 border-[12px] border-black border-solid w-screen h-screen"></div>
                     <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-0 bg-black w-[200px] h-[70px] rounded-b-xl"></div>
-                    <div class="" id="battery">
-                        <div id="battery-level"></div>
-                        <div id="battery-level-digit">0%</div>
-                        <h1 id="sattus">nodsd</h1>
+                    <div class="absolute flex flex-col items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" id="battery">
+                        <div id="battery-level-digit" class="text-[40px] text-[#D0F023]">54%</div>
+                        <h1 id="sattus">Discharged</h1>
                     </div>
                     <div onclick="Back()" class="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-[4px] border-[4px] text-black bg-[#D0F023] border-[#D0F023] border-solid rounded-b-xl">Back</div>
                 </div>
@@ -88,17 +87,26 @@ navigator.getBattery().then(function (battery) {
     });
 
     function updateChargeInfo() {
-        console.log(battery.charging);
         if (battery.charging) {
-            document.querySelector('#sattus').innerHTML = 'Заряжаешься';
+            const sattus = document.querySelectorAll('#sattus')
+            sattus.forEach(el => {
+                el.innerHTML = 'Charging';
+            })
+            console.log('hi')
         } else {
-            document.querySelector('#sattus').innerHTML = 'Разряжается';
+            const sattus = document.querySelectorAll('#sattus')
+            sattus.forEach(el => {
+                el.innerHTML = 'Discharged';
+            })
         }
     }
 
     battery.addEventListener('levelchange', updateLeveInfo);
 
     function updateLeveInfo() {
-        document.querySelector('#battery-level-digit').innerHTML = battery.level*100+'%';
+        const battery_level_digit = document.querySelectorAll('#battery-level-digit')
+        battery_level_digit.forEach(el => {
+            el.innerHTML = battery.level * 100 + '%';
+        })
     }
 })
