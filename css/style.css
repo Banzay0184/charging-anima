@@ -1,11 +1,11 @@
 
-
 .slider-line {
     display: flex;
 }
 
 .swiper-wrapper {
     align-items: center;
+    gap: 20px;
 }
 
 .hot-text {
@@ -17,11 +17,12 @@
 }
 
 .swiper-slide {
-    width: 50% !important;
+    width: 40% !important;
     height: 20% !important;
 }
 
 .charging-video {
     height: 300px !important;
     border-radius: 20px;
+    object-fit: cover;
 }
